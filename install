@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Installation script for llm-cli
+
+echo "[llm-cli] Creating virtual environment..."
+python3 -m venv .venv || { echo "Failed to create venv"; exit 1; }
+
+echo "[llm-cli] Activating environment..."
+source .venv/bin/activate
+
+echo "[llm-cli] Installing in editable mode..."
+pip install --upgrade pip setuptools > /dev/null
+pip install -e .
+
+# Optionnel : créer symlink dans ~/.local/bin
+mkdir -p ~/.local/bin
+ln -sf "$(pwd)/.venv/bin/llm" ~/.local/bin/llm
+
+echo "[llm-cli] Done. You can now run:"
+echo "    llm"
